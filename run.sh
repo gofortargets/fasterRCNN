@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python trainval_net.py --dataset pascal_voc --net vgg16
+python trainval_net.py --dataset coco --net vgg16
