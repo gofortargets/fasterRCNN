@@ -59,8 +59,9 @@ for split in ['train', 'val', 'val1', 'val2', 'test']:
     data_path = 'data/imagenet/ILSVRC'
     __sets[name] = (lambda split=split, devkit_path=devkit_path, data_path=data_path: imagenet(split,devkit_path,data_path))
 
-print ('set =', __sets)
+
 def get_imdb(name):
+  print ('set =', __sets)
   """Get an imdb (image database) by name."""
   if name not in __sets:
     raise KeyError('Unknown dataset: {}'.format(name))
