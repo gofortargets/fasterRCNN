@@ -206,9 +206,12 @@ if __name__ == '__main__':
   imdb, roidb, ratio_list, ratio_index = combined_roidb(args.imdb_name)
   print ('imbdb =', imdb)
   print ('roidb =', roidb)
+
   print('ratio_list = ', ratio_list)
   print('radio_index =', ratio_index)
-
+  print ('roidb[0] = ', roidb[0])
+  print ('ratio_list[0] = ', ratio_list[0])
+  print ('radio_index[0] = ', ratio_index[0])
   train_size = len(roidb)
 
   print('{:d} roidb entries'.format(len(roidb)))
