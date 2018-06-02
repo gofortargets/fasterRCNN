@@ -211,7 +211,7 @@ if __name__ == '__main__':
   print('radio_index =', ratio_index)
   print ('roidb[0] = ', roidb[0])
   print ('ratio_list[0] = ', ratio_list[0])
-  print ('radio_index[0] = ', ratio_index[0])
+  print ('radio_index[0] = ', ratio_index[:20])
   train_size = len(roidb)
 
   print('{:d} roidb entries'.format(len(roidb)))
