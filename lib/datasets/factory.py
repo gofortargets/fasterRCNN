@@ -15,7 +15,7 @@ from datasets.pascal_voc import pascal_voc
 from datasets.coco import coco
 from datasets.imagenet import imagenet
 from datasets.vg import vg
-from datasets.thilini import thilini
+# from datasets.thilini import thilini
 import numpy as np
 
 # Set up voc_<year>_<split>
@@ -60,8 +60,8 @@ for split in ['train', 'val', 'val1', 'val2', 'test']:
     __sets[name] = (lambda split=split, devkit_path=devkit_path, data_path=data_path: imagenet(split,devkit_path,data_path))
 
 # set up thilini
-annotation_file = 'ann_new.json'
-__sets["thilini"] = (lambda annotation_file = annotation_file:thilini(annotation_file))
+# annotation_file = 'ann_new.json'
+# __sets["thilini"] = (lambda annotation_file = annotation_file:thilini(annotation_file))
 
 def get_imdb(name):
   print ('set =', __sets)
