@@ -44,9 +44,13 @@ def parse_args():
   Parse input arguments
   """
   parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
-  parser.add_argument('--dataset', dest='dataset',
-                      help='training dataset',
+  parser.add_argument('--_dataset', dest='_dataset',
+                      help='training _dataset',
                       default='pascal_voc', type=str)
+  parser.add_argument('--val', dest='val',
+                      help='validation',
+                      default='False', type=bool)
+
   parser.add_argument('--cfg', dest='cfg_file',
                       help='optional config file',
                       default='cfgs/vgg16.yml', type=str)
@@ -127,6 +131,14 @@ if __name__ == '__main__':
       args.imdb_name = "vg_150-50-50_minitrain"
       args.imdbval_name = "vg_150-50-50_minival"
       args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]']
+
+  elif args.dataset == "thilini":
+      args.imdb_name = "thilini_train"
+      if args.val:
+          args.imdbval_name = "thilini_val"
+      else:
+          args.imdbval_name = "thilini_test"
+      args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '50']
 
   args.cfg_file = "cfgs/{}_ls.yml".format(args.net) if args.large_scale else "cfgs/{}.yml".format(args.net)
 

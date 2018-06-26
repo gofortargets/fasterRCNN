@@ -41,6 +41,9 @@ def parse_args():
   parser.add_argument('--dataset', dest='dataset',
                       help='training dataset',
                       default='pascal_voc', type=str)
+  parser.add_argument('--val', dest='val',
+                      help='validation',
+                      default='False', type=bool)
   parser.add_argument('--net', dest='net',
                     help='vgg16, res101',
                     default='vgg16', type=str)
@@ -82,7 +85,7 @@ def parse_args():
 # config optimization
   parser.add_argument('--o', dest='optimizer',
                       help='training optimizer',
-                      default="sgd", type=str)
+                      default="adam", type=str)
   parser.add_argument('--lr', dest='lr',
                       help='starting learning rate',
                       default=0.001, type=float)
@@ -148,7 +151,6 @@ class sampler(Sampler):
 if __name__ == '__main__':
 
   args = parse_args()
-
   print('Called with args:')
   print(args)
 
@@ -180,8 +182,12 @@ if __name__ == '__main__':
       args.imdbval_name = "vg_150-50-50_minival"
       args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '50']
   elif args.dataset == "thilini":
-      args.imdb_name = "coco_train"
-      args.imdbval_name = "coco_test"
+      args.imdb_name = "thilini_train"
+      if args.val:
+          args.imdbval_name = "thilini_val"
+      else:
+          args.imdbval_name = "thilini_test"
+
       args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '50']
 
   args.cfg_file = "cfgs/{}_ls.yml".format(args.net) if args.large_scale else "cfgs/{}.yml".format(args.net)
@@ -205,13 +211,12 @@ if __name__ == '__main__':
   cfg.USE_GPU_NMS = args.cuda
   imdb, roidb, ratio_list, ratio_index = combined_roidb(args.imdb_name)
   print ('imbdb =', imdb)
-  print ('roidb =', roidb)
-
-  print('ratio_list = ', ratio_list)
-  print('radio_index =', ratio_index)
+  # print ('roidb =', roidb)
+  # print('ratio_list = ', ratio_list)
+  # print('radio_index =', ratio_index)
   print ('roidb[0] = ', roidb[0])
-  print ('ratio_list[0] = ', ratio_list[:20])
-  print ('radio_index[0] = ', ratio_index[:20])
+  print ('ratio_list[:20] = ', ratio_list[:20])
+  print ('radio_index[:20] = ', ratio_index[:20])
   train_size = len(roidb)
 
   print('{:d} roidb entries'.format(len(roidb)))
