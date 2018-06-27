@@ -40,7 +40,7 @@ def prepare_roidb(imdb):
          
   for i in range(len(imdb.image_index)):
     if i % 1000 == 0:
-      print('Current at', id)
+      print('Current at', i)
 
     roidb[i]['img_id'] = imdb.image_id_at(i)
     roidb[i]['image'] = imdb.image_path_at(i)
@@ -123,7 +123,7 @@ def combined_roidb(imdb_names, training=True):
 
     print('Preparing training data...')
 
-    print('Skip prepare!')
+    # print('Skip prepare!')
     prepare_roidb(imdb)
     #ratio_index = rank_roidb_ratio(imdb)
     print('done')
