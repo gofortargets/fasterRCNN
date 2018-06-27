@@ -210,7 +210,7 @@ if __name__ == '__main__':
   cfg.TRAIN.USE_FLIPPED = True
   cfg.USE_GPU_NMS = args.cuda
   imdb, roidb, ratio_list, ratio_index = combined_roidb(args.imdb_name)
-  print ('imbdb =', imdb)
+  # print ('imbdb =', imdb)
   # print ('roidb =', roidb)
   # print('ratio_list = ', ratio_list)
   # print('radio_index =', ratio_index)
