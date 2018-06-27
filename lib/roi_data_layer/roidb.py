@@ -30,6 +30,7 @@ def prepare_roidb(imdb):
     if not (imdb.name.startswith('coco')):
       roidb[i]['width'] = sizes[i][0]
       roidb[i]['height'] = sizes[i][1]
+
     # need gt_overlaps as a dense array for argmax
     gt_overlaps = roidb[i]['gt_overlaps'].toarray()
     # max overlap with gt over classes (columns)
@@ -45,6 +46,13 @@ def prepare_roidb(imdb):
     # max overlap > 0 => class should not be zero (must be a fg class)
     nonzero_inds = np.where(max_overlaps > 0)[0]
     assert all(max_classes[nonzero_inds] != 0)
+
+    # cache_file = os.path.join(self.cache_path, self.name + '_gt_roidb.pkl')
+    # if os.path.exists(cache_file):
+    #   with open(cache_file, 'rb') as fid:
+    #     roidb = pickle.load(fid)
+    #   print('{} gt roidb loaded from {}'.format(self.name, cache_file))
+    #   return roidb
 
 
 def rank_roidb_ratio(roidb):
@@ -100,7 +108,8 @@ def combined_roidb(imdb_names, training=True):
 
     print('Preparing training data...')
 
-    prepare_roidb(imdb)
+    print('Skip prepare!')
+    # prepare_roidb(imdb)
     #ratio_index = rank_roidb_ratio(imdb)
     print('done')
 
