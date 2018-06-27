@@ -9,6 +9,9 @@ from model.utils.config import cfg
 from datasets.factory import get_imdb
 import PIL
 import pdb
+import os
+import pickle
+import time
 
 def prepare_roidb(imdb):
   """Enrich the imdb's roidb by adding some derived quantities that
@@ -19,12 +22,26 @@ def prepare_roidb(imdb):
   """
 
   roidb = imdb.roidb
+  print ('imdb.name =', imdb.name)
   print ('roidb in prepare_roidb[0] =', roidb[0])
+
+  cache_file = os.path.join(imdb.name + '_roidb_prepared.pkl')
+  if os.path.exists(cache_file):
+      with open(cache_file, 'rb') as fid:
+        roidb = pickle.load(fid)
+      print('{} roidb prepared loaded from {}'.format(imdb.name, cache_file))
+      return
+      # return roidb
+
+  tic = time.time()
   if not (imdb.name.startswith('coco')):
     sizes = [PIL.Image.open(imdb.image_path_at(i)).size
          for i in range(imdb.num_images)]
          
   for i in range(len(imdb.image_index)):
+    if i % 1000 == 0:
+      print('Current at', id)
+
     roidb[i]['img_id'] = imdb.image_id_at(i)
     roidb[i]['image'] = imdb.image_path_at(i)
     if not (imdb.name.startswith('coco')):
@@ -46,14 +63,12 @@ def prepare_roidb(imdb):
     # max overlap > 0 => class should not be zero (must be a fg class)
     nonzero_inds = np.where(max_overlaps > 0)[0]
     assert all(max_classes[nonzero_inds] != 0)
+  print('Done (t=%0.2fs)' % (time.time() - tic))
 
-    # cache_file = os.path.join(self.cache_path, self.name + '_gt_roidb.pkl')
-    # if os.path.exists(cache_file):
-    #   with open(cache_file, 'rb') as fid:
-    #     roidb = pickle.load(fid)
-    #   print('{} gt roidb loaded from {}'.format(self.name, cache_file))
-    #   return roidb
-
+  print('Dumping...')
+  with open(cache_file, 'wb') as fid:
+    pickle.dump(roidb, fid, pickle.HIGHEST_PROTOCOL)
+  print('Done')
 
 def rank_roidb_ratio(roidb):
     # rank roidb based on the ratio between width and height.
@@ -109,7 +124,7 @@ def combined_roidb(imdb_names, training=True):
     print('Preparing training data...')
 
     print('Skip prepare!')
-    # prepare_roidb(imdb)
+    prepare_roidb(imdb)
     #ratio_index = rank_roidb_ratio(imdb)
     print('done')
 
