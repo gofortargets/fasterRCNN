@@ -183,10 +183,10 @@ if __name__ == '__main__':
       args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '50']
   elif args.dataset == "thilini":
       args.imdb_name = "thilini_train"
-      if args.val:
-          args.imdbval_name = "thilini_val"
-      else:
-          args.imdbval_name = "thilini_test"
+      # if args.val:
+      #     args.imdbval_name = "thilini_val"
+      # else:
+      #     args.imdbval_name = "thilini_test"
 
       args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '50']
 
