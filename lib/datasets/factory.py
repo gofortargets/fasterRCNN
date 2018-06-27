@@ -65,7 +65,7 @@ for split in ['train', 'val', 'val1', 'val2', 'test']:
 
 for split in ['train', 'test', 'val']:
     name = 'thilini_' + split
-    __sets[name] = (lambda data_type=name: thilini(name))
+    __sets[name] = (lambda data_type=name: thilini(data_type))
 
 def get_imdb(name):
   # print ('set =', __sets)
