@@ -27,9 +27,9 @@ def prepare_roidb(imdb):
 
   cache_file = os.path.join(imdb.name + '_roidb_prepared.pkl')
   if os.path.exists(cache_file):
-      global roidb
+      # global roidb
       with open(cache_file, 'rb') as fid:
-        roidb = pickle.load(fid)
+        imdb.roidb = pickle.load(fid)
       print('{} roidb prepared loaded from {}'.format(imdb.name, cache_file))
       return
       # return roidb
