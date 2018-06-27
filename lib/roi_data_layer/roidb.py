@@ -27,11 +27,10 @@ def prepare_roidb(imdb):
 
   cache_file = os.path.join(imdb.name + '_roidb_prepared.pkl')
   if os.path.exists(cache_file):
-      # global roidb
       with open(cache_file, 'rb') as fid:
-        imdb.roidb = pickle.load(fid)
+        roidb = pickle.load(fid)
       print('{} roidb prepared loaded from {}'.format(imdb.name, cache_file))
-      return
+      return roidb
       # return roidb
 
   tic = time.time()
@@ -70,6 +69,7 @@ def prepare_roidb(imdb):
   with open(cache_file, 'wb') as fid:
     pickle.dump(roidb, fid, pickle.HIGHEST_PROTOCOL)
   print('Done')
+  return roidb
 
 def rank_roidb_ratio(roidb):
     # rank roidb based on the ratio between width and height.
@@ -125,11 +125,11 @@ def combined_roidb(imdb_names, training=True):
     print('Preparing training data...')
 
     # print('Skip prepare!')
-    prepare_roidb(imdb)
+    prepared_roidb = prepare_roidb(imdb)
     #ratio_index = rank_roidb_ratio(imdb)
     print('done')
 
-    return imdb.roidb
+    return prepared_roidb
   
   def get_roidb(imdb_name):
     print ('get_roidb for', imdb_names)
