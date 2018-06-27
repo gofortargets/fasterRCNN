@@ -34,6 +34,7 @@ except NameError:
 
 class thilini(imdb):
     def __init__(self, data_type):
+        print ('Init class for', data_type)
         imdb.__init__(self, data_type)
 
         # # COCO specific config options
