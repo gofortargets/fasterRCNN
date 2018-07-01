@@ -58,7 +58,7 @@ class thilini(imdb):
         print('Top vocab =', self.classes[:10])
 
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
-        self._roidb_handler = self.gt_roidb()
+        self._roidb_handler = self.gt_roidb
         print ('Done Init class')
 
     # imgs = {}
@@ -106,7 +106,7 @@ class thilini(imdb):
         return gt_roidb
 
     def _load_annotation(self, index):
-        print ('self.num_classes =', self.num_classes)
+        # print ('self.num_classes =', self.num_classes)
         im_ann = self._dataset[index]
         width = int(im_ann['width'])
         height = int(im_ann['height'])
