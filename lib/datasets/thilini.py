@@ -70,9 +70,11 @@ class thilini(imdb):
             print('{} gt classes loaded from {}'.format(self.name, cache_file))
             return
 
+        self._classes = set()
         for imageID in self._dataset.keys():
            for region in self._dataset[imageID]['region_list']:
-              self._classes.append(region['verb'])
+              self._classes.add(region['verb'])
+        self._classes = list(self._classes)
 
         with open(cache_file, 'wb') as fid:
             pickle.dump(self._classes, fid, pickle.HIGHEST_PROTOCOL)
