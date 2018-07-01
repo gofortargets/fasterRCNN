@@ -60,7 +60,7 @@ def prepare_roidb(imdb):
     roidb[i]['max_overlaps'] = max_overlaps
 
     #SKIP THIS check because thilini classes don't contain background
-    if imdb.name != 'thilini':
+    if 'thilini' not in imdb.name:
         # sanity checks
         # max overlap of 0 => class should be zero (background)
         zero_inds = np.where(max_overlaps == 0)[0]
