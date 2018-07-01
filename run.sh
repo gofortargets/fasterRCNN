@@ -5,4 +5,6 @@
 #                       --cuda
 python trainval_net.py --dataset thilini --net vgg16 \
                        --save_dir models \
-                       --cuda
+                       --cuda \
+                       --mGPUs \
+                       --bs 10
