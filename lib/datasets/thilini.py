@@ -54,8 +54,9 @@ class thilini(imdb):
         self._dataset = dataset
         self._image_index = self._load_image_set_index()
         self.getClasses()
-        print('Total vocab =', len(self.classes))
+        print('Total vocab =', len(self.classes), self.num_classes)
         print('Top vocab =', self.classes[:10])
+
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
         self._roidb_handler = self.gt_roidb()
 
@@ -67,6 +68,7 @@ class thilini(imdb):
         if os.path.exists(cache_file):
             with open(cache_file, 'rb') as fid:
                 self._classes = pickle.load(fid)
+                print ('len of loaded classes =', len(self._classes))
             print('{} gt classes loaded from {}'.format(self.name, cache_file))
             return
 
@@ -74,8 +76,8 @@ class thilini(imdb):
         for imageID in self._dataset.keys():
            for region in self._dataset[imageID]['region_list']:
               self._classes.add(region['verb'])
-        self._classes = list(self._classes)
 
+        self._classes = list(self._classes)
         with open(cache_file, 'wb') as fid:
             pickle.dump(self._classes, fid, pickle.HIGHEST_PROTOCOL)
 
@@ -103,6 +105,7 @@ class thilini(imdb):
         return gt_roidb
 
     def _load_annotation(self, index):
+        print ('self.num_classes =', self.num_classes)
         im_ann = self._dataset[index]
         width = int(im_ann['width'])
         height = int(im_ann['height'])
