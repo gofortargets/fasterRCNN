@@ -239,7 +239,6 @@ if __name__ == '__main__':
   num_boxes = torch.LongTensor(1)
   gt_boxes = torch.FloatTensor(1)
 
-
   # ship to cuda
   if args.cuda:
     im_data = im_data.cuda()
@@ -256,6 +255,7 @@ if __name__ == '__main__':
   if args.cuda:
     cfg.CUDA = True
 
+  print ('num_classes =', len(imdb.classes))
   # initilize the network here.
   if args.net == 'vgg16':
     fasterRCNN = vgg16(imdb.classes, pretrained=True, class_agnostic=args.class_agnostic)
