@@ -82,7 +82,7 @@ class thilini(imdb):
             pickle.dump(self._classes, fid, pickle.HIGHEST_PROTOCOL)
 
     def gt_roidb(self):
-        print ('Getting roidb...')
+        print ('Getting roidb from raw dataset ...')
         cache_file = os.path.join(self.cache_path, self.name + '_gt_roidb.pkl')
         if os.path.exists(cache_file):
             with open(cache_file, 'rb') as fid:

@@ -210,10 +210,6 @@ if __name__ == '__main__':
   cfg.TRAIN.USE_FLIPPED = True
   cfg.USE_GPU_NMS = args.cuda
   imdb, roidb, ratio_list, ratio_index = combined_roidb(args.imdb_name)
-  # print ('imbdb =', imdb)
-  # print ('roidb =', roidb)
-  # print('ratio_list = ', ratio_list)
-  # print('radio_index =', ratio_index)
   print ('roidb[0] = ', roidb[0])
   print ('ratio_list[:20] = ', ratio_list[:20])
   print ('radio_index[:20] = ', ratio_index[:20])
@@ -256,6 +252,8 @@ if __name__ == '__main__':
     cfg.CUDA = True
 
   print ('num_classes =', len(imdb.classes))
+  print (imdb.classes[:10])
+  print (type(imdb.classes))
   # initilize the network here.
   if args.net == 'vgg16':
     fasterRCNN = vgg16(imdb.classes, pretrained=True, class_agnostic=args.class_agnostic)

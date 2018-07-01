@@ -22,8 +22,8 @@ def prepare_roidb(imdb):
   """
 
   roidb = imdb.roidb
-  print ('imdb.name =', imdb.name)
-  print ('roidb in prepare_roidb[0] =', roidb[0])
+  # print ('imdb.name =', imdb.name)
+  # print ('roidb in prepare_roidb[0] =', roidb[0])
 
   cache_file = os.path.join(imdb.name + '_roidb_prepared.pkl')
   if os.path.exists(cache_file):
@@ -140,6 +140,7 @@ def combined_roidb(imdb_names, training=True):
     roidb = get_training_roidb(imdb)
     return roidb
 
+  print ('')
   print ('Geting combined_roidb for', imdb_names)
   roidbs = [get_roidb(s) for s in imdb_names.split('+')]
   roidb = roidbs[0]
