@@ -59,6 +59,7 @@ class thilini(imdb):
 
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
         self._roidb_handler = self.gt_roidb()
+        print ('Done Init class')
 
     # imgs = {}
     def getClasses(self):
