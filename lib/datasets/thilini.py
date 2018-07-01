@@ -46,6 +46,7 @@ class thilini(imdb):
         # if not annotation_file_path == None:
 
         assert annotation_file_path != None
+        # if self._dataset == None:
         print('loading annotations ', annotation_file_path, 'into memory...')
         tic = time.time()
         dataset = json.load(open(annotation_file_path, 'r'))

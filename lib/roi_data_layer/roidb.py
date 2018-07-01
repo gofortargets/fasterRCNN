@@ -127,7 +127,8 @@ def combined_roidb(imdb_names, training=True):
     # print('Skip prepare!')
     prepared_roidb = prepare_roidb(imdb)
     #ratio_index = rank_roidb_ratio(imdb)
-    print('done')
+    print('done prepare')
+    print ('')
 
     return prepared_roidb
   
@@ -144,7 +145,8 @@ def combined_roidb(imdb_names, training=True):
   print ('Geting combined_roidb for', imdb_names)
   roidbs = [get_roidb(s) for s in imdb_names.split('+')]
   roidb = roidbs[0]
-  # print('roidb = ', roidb)
+  print('roidb[0] = ', roidb[0])
+  print ('len(roidbs) =', len(roidbs))
 
   if len(roidbs) > 1:
     for r in roidbs[1:]:
