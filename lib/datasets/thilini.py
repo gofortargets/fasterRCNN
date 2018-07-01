@@ -125,6 +125,7 @@ class thilini(imdb):
             y2 = np.min((height - 1, y1 + np.max((0, int(bbox['h']) - 1))))
             boxes.append([x1, y1, x2, y2])
             cls = self._class_to_ind[box['verb']]
+            assert cls < self.num_classes
             gt_classes.append(cls)
             overlaps[ix][cls] = 1.0
             seg_areas[ix] = (x2 - x1 + 1) * (y2 - y1 + 1)
