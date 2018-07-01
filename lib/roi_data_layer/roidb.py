@@ -37,7 +37,9 @@ def prepare_roidb(imdb):
   if not (imdb.name.startswith('coco')):
     sizes = [PIL.Image.open(imdb.image_path_at(i)).size
          for i in range(imdb.num_images)]
-         
+  print ('prepare images for', len(imdb.image_index))
+  print ('type of roidb', type(roidb))
+
   for i in range(len(imdb.image_index)):
     if i % 1000 == 0:
       print('Current at', i)
@@ -123,7 +125,6 @@ def combined_roidb(imdb_names, training=True):
       print('done')
 
     print('Preparing training data...')
-
     # print('Skip prepare!')
     prepared_roidb = prepare_roidb(imdb)
     #ratio_index = rank_roidb_ratio(imdb)
