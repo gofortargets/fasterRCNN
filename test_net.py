@@ -44,7 +44,7 @@ def parse_args():
   Parse input arguments
   """
   parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
-  parser.add_argument('--_dataset', dest='_dataset',
+  parser.add_argument('--dataset', dest='_dataset',
                       help='training _dataset',
                       default='pascal_voc', type=str)
   parser.add_argument('--val', dest='val',
@@ -182,7 +182,6 @@ if __name__ == '__main__':
   fasterRCNN.load_state_dict(checkpoint['model'])
   if 'pooling_mode' in checkpoint.keys():
     cfg.POOLING_MODE = checkpoint['pooling_mode']
-
 
   print('load model successfully!')
   # initilize the tensor holder here.
