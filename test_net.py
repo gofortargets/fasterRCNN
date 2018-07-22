@@ -44,13 +44,12 @@ def parse_args():
   Parse input arguments
   """
   parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
-  parser.add_argument('--dataset', dest='_dataset',
+  parser.add_argument('--dataset', dest='dataset',
                       help='training _dataset',
                       default='pascal_voc', type=str)
   parser.add_argument('--val', dest='val',
                       help='validation',
                       default='False', type=bool)
-
   parser.add_argument('--cfg', dest='cfg_file',
                       help='optional config file',
                       default='cfgs/vgg16.yml', type=str)
